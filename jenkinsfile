@@ -7,4 +7,10 @@ node('master'){
     cleanWs()
 
     }
+    
+   stage("BUILD THE IMAGE"){
+
+            sh '''
+            echo "Hello world!!"'''
+       }
 }
