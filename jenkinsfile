@@ -1,0 +1,10 @@
+myvar = 'initial'
+
+node('master'){
+
+   stage("CLEAN WORKSPACE"){
+
+    cleanWs()
+
+    }
+}
