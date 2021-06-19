@@ -8,6 +8,26 @@ node('master'){
 
     }
     
+   stage('CHECKOUT CODE'){
+
+        echo "${env.gitlabBranch}"
+
+        echo "${env.gitlabSourceRepoName}"
+
+        echo "${JENKINS_HOME}"
+
+        echo "${WORKSPACE}"
+
+        echo "${env.gitlabUserEmail}"
+	
+	dir("CodeBuild"){           
+
+            git branch: "master", credentialsId: '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', url: "https://github.com/tejasi4/aYo-kube.git"
+
+            }  
+
+    } 
+    
    stage("BUILD THE IMAGE"){
 
             sh '''
