@@ -31,6 +31,10 @@ node('master'){
    stage("BUILD THE IMAGE"){
 
             sh '''
+	    pwd
+	    cd  $WORKSPACE/CodeBuild/
+	    pwd
+	    ls -lrt
             echo "Hello world!!"'''
        }
 }
