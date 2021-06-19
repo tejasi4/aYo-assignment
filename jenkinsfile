@@ -61,6 +61,8 @@ node('master'){
         tag1=`cat tag.txt`
 	echo $tag1
 	#docker container run -it -d --name tomcatcontainer6 -p 80:8080 -p 443:8443  -v /var/log/serverlogs:/usr/local/tomcat/logs  mywebapp:$tag1
+	cd  $WORKSPACE/CodeBuild/
+	ls -lrt
 	/usr/local/bin/docker-compose up -d'''
 	}
 }
