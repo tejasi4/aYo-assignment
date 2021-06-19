@@ -7,7 +7,7 @@ node('master'){
     cleanWs()
 
     }
-    
+
    stage('CHECKOUT CODE'){
 
         echo "${env.gitlabBranch}"
@@ -26,15 +26,31 @@ node('master'){
 
             }  
 
-    } 
+    }
+   
+   stage("TAG Number"){
+
+    sh '''
+
+    tag=`date +"%Y%m%d-%H%M%S"`
+
+    echo $tag
+
+    echo $tag > tag.txt'''
+
+ 
+
+    }
     
    stage("BUILD THE IMAGE"){
 
-            sh '''
-	    pwd
-	    cd  $WORKSPACE/CodeBuild/
-	    pwd
-	    ls -lrt
+	sh '''
+	tag1=`cat tag.txt`
+
+        echo $tag1 
+	pwd  
+	cd  $WORKSPACE/CodeBuild/  
+	docker build -t mywebapp:$tag1 .
             echo "Hello world!!"'''
        }
 }
