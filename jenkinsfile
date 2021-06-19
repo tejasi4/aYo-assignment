@@ -22,7 +22,7 @@ node('master'){
 	
 	dir("CodeBuild"){           
 
-            git branch: "master", credentialsId: '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', url: "https://github.com/tejasi4/aYo-kube.git"
+            git branch: "master", credentialsId: '0516ffc3-6019-464d-87bf-0a252f4de82d', url: "https://github.com/tejasi4/aYo-kube.git"
 
             }  
 
