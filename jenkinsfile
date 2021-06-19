@@ -1,0 +1,56 @@
+myvar = 'initial'
+
+node('master'){
+
+   stage("CLEAN WORKSPACE"){
+
+    cleanWs()
+
+    }
+
+   stage('CHECKOUT CODE'){
+
+        echo "${env.gitlabBranch}"
+
+        echo "${env.gitlabSourceRepoName}"
+
+        echo "${JENKINS_HOME}"
+
+        echo "${WORKSPACE}"
+
+        echo "${env.gitlabUserEmail}"
+	
+	dir("CodeBuild"){           
+
+            git branch: "master", credentialsId: '0516ffc3-6019-464d-87bf-0a252f4de82d', url: "https://github.com/tejasi4/aYo-kube.git"
+
+            }  
+
+    }
+   
+   stage("TAG Number"){
+
+    sh '''
+
+    tag=`date +"%Y%m%d-%H%M%S"`
+
+    echo $tag
+
+    echo $tag > tag.txt'''
+
+ 
+
+    }
+    
+   stage("BUILD THE IMAGE"){
+
+	sh '''
+	tag1=`cat tag.txt`
+
+        echo $tag1 
+	pwd  
+	cd  $WORKSPACE/CodeBuild/  
+	docker build -t mywebapp:$tag1 .
+            echo "Hello world!!"'''
+       }
+}
