@@ -50,6 +50,6 @@ node('master'){
         echo $tag1 
 	pwd  
 	cd  $WORKSPACE/CodeBuild/  
-	docker build -t mywebapp:$tag1 .
+	docker build -t mywebapp:$tag1 .'''
        }
 }
