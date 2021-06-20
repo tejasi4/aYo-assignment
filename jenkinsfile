@@ -22,7 +22,7 @@ node('master'){
 	
 	dir("CodeBuild"){           
 
-            git branch: "master", credentialsId: '0516ffc3-6019-464d-87bf-0a252f4de82d', url: "https://github.com/tejasi4/aYo-kube.git"
+            git branch: "master", credentialsId: '2e89d525-5780-4476-a895-778a07737e89', url: "https://github.com/tejasi4/aYo-kube.git"
 
             }  
 
@@ -53,4 +53,16 @@ node('master'){
 	docker build -t mywebapp:$tag1 .
             echo "Hello world!!"'''
        }
+ 
+   stage("DEPLOYMENT ON CLUSTER") {
+
+    sh '''
+	pwd
+        tag1=`cat tag.txt`
+	echo $tag1
+	#docker container run -it -d --name tomcatcontainer6 -p 80:8080 -p 443:8443  -v /var/log/serverlogs:/usr/local/tomcat/logs  mywebapp:$tag1
+	cd  $WORKSPACE/CodeBuild/
+	ls -lrt
+	/usr/local/bin/docker-compose up -d'''
+	}
 }
